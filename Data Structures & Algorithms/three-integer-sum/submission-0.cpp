@@ -1,28 +1,28 @@
 class Solution {
-public:
+   public:
     vector<vector<int>> threeSum(vector<int>& nums) {
-    vector<vector<int>> triplets;
-    sort(nums.begin(),nums.end());
-    for(int i=0;i<nums.size()-2;++i){
-        int left = i+1, right = nums.size()-1;
-        while(left<right){
-        vector<int> n;
-        n.push_back(nums[i]);
-            if(nums[i]+ nums[left] + nums[right] == 0){
-                n.push_back(nums[left]);
-                n.push_back(nums[right]);
-                sort(n.begin(),n.end());
-                left++;
-                right--;
-                if(find(triplets.begin(),triplets.end(),n)==triplets.end())
-                    triplets.push_back(n);
-            }
-            else if(nums[i]+ nums[left] + nums[right] > 0)
-                right--;
-            else if(nums[i]+ nums[left] + nums[right] < 0)
-                left++;
+        vector<vector<int>> ans;
+        sort(nums.begin(), nums.end());
+        int n = nums.size();
+
+        for (int i = 0; i < n; i++) {
+            if (nums[i] > 0) break;
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
+            int l = i + 1, r = n - 1;
+            while (l < r) {
+                if (nums[i] + nums[l] + nums[r] > 0)
+                    r--;
+                else if (nums[i] + nums[l] + nums[r] < 0)
+                    l++;
+                else {
+                    ans.push_back({nums[i], nums[l], nums[r]});
+                    l++;
+                    r--;
+                    while (l < r && nums[l] == nums[l - 1]) l++;
+                }
             }
         }
-        return triplets;
+        return ans;
     }
 };
