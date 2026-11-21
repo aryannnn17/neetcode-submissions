@@ -10,18 +10,29 @@
  * };
  */
 
+/*
+Ex: [1,null,2,3,4,5]
+
+      1
+        \
+        2
+        /\
+        3 4
+
+ */
 class Solution {
    public:
-    int d = 0;
-    int lengthD(TreeNode* root) {
+    int height(TreeNode* root, int& dia) {
         if (!root) return 0;
-        int lh = lengthD(root->left);
-        int rh = lengthD(root->right);
-        d = max(lh + rh, d);
+
+        int lh = height(root->left, dia);
+        int rh = height(root->right, dia);
+        dia = max(dia, lh + rh);
         return 1 + max(lh, rh);
     }
     int diameterOfBinaryTree(TreeNode* root) {
-        lengthD(root);
-        return d;
+        int dia = 0;
+        height(root, dia);
+        return dia;
     }
 };
