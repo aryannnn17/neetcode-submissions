@@ -1,10 +1,10 @@
 class Solution {
-public:
+   public:
     bool isAnagram(string s, string t) {
-        sort(s.begin(),s.end());
-        sort(t.begin(),t.end());
-        if(s==t)
-            return true;
-        return false;
+        vector<int> v1(26, 0);
+        vector<int> v2(26, 0);
+        for (const char& c : s) v1[c - 'a']++;
+        for (const char& c : t) v2[c - 'a']++;
+        return (v1 == v2) ? 1 : 0;
     }
 };
