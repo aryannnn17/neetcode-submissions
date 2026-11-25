@@ -1,26 +1,10 @@
 class Solution {
-public:
+   public:
     bool isAnagram(string s, string t) {
-        vector<int> freq_s(26,0);
-        vector<int> freq_t(26,0);
-        for(char& c: s)
-            freq_s[c-'a']++;
-        for(char& c: t)
-            freq_t[c-'a']++;
-        if(freq_s==freq_t)
-            return true;
-        return false;
+        vector<int> v1(26, 0);
+        vector<int> v2(26, 0);
+        for (const char& c : s) v1[c - 'a']++;
+        for (const char& c : t) v2[c - 'a']++;
+        return (v1 == v2);
     }
 };
-
-
-// class Solution {
-// public:
-//     bool isAnagram(string s, string t) {
-//         sort(s.begin(),s.end());
-//         sort(t.begin(),t.end());
-//         if(s==t)
-//             return true;
-//         return false;
-//     }
-// };
